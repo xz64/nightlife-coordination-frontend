@@ -23,7 +23,7 @@
               :key="location.id"
               :name="location.name"
               :amGoing="location.amGoing"
-              :numGoing="1"
+              :numGoing="location.numGoing"
               :description="location.description"
             ></location-listing>
           </ul>
