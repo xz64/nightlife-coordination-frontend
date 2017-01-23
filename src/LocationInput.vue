@@ -1,7 +1,7 @@
 <template>
   <div>
     <label class="label">Location</label>
-    <p class="control">
+    <p class="control" :class="{ 'is-loading': isLoading }">
       <input class="input" type="text" placeholder="Enter at least 3 characters" @input="search">
       {{ searchText }}
     </p>
@@ -10,6 +10,13 @@
 
 <script>
   export default {
+    props: {
+      isLoading: {
+        type: Boolean,
+        default: false,
+        required: true,
+      },
+    },
     data() {
       return {
         searchText: '',
@@ -26,6 +33,7 @@
           this.timeout = null;
         }
         this.timeout = setTimeout(() => {
+          this.$emit('locationEntered', event.target.value);
         }, 1000);
       },
     },
