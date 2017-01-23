@@ -54,6 +54,11 @@ var config = {
       }
     ]
   },
+  devServer: {
+    proxy: {
+      '/api': 'http://localhost:8081'
+    }
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.template.ejs'),
