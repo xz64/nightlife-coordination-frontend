@@ -16,7 +16,7 @@
           <div class="level-left">
             <div class="level-item">{{ numGoing }} Going</div>
             <div class="level-item">
-              <a href="#">{{ amGoing ? 'I\'m not going' : 'I\'m going' }}</a>
+              <a @click.prevent="handleGoAction">{{ amGoing ? 'I\'m not going' : 'I\'m going' }}</a>
             </div>
           </div>
         </nav>
@@ -28,10 +28,20 @@
 <script>
   export default {
     props: {
+      id: String,
       name: String,
       description: String,
       amGoing: Boolean,
       numGoing: Number,
+    },
+    methods: {
+      handleGoAction() {
+        if (this.amGoing) {
+          this.$emit('unregister', this.id);
+        } else {
+          this.$emit('register', this.id);
+        }
+      },
     },
   };
 </script>

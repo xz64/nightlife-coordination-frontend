@@ -21,10 +21,13 @@
             <location-listing
               v-for="location in locations"
               :key="location.id"
+              :id="location.id"
               :name="location.name"
               :amGoing="location.amGoing"
               :numGoing="location.numGoing"
               :description="location.description"
+              @register="onRegister($event)"
+              @unregister="onUnregister($event)"
             ></location-listing>
           </ul>
         </div>
@@ -57,6 +60,30 @@
           .catch(() => {
             this.isLoading = false;
           });
+      },
+      onRegister(id) {
+        LocationService.register(id)
+          .then(() => {
+            const location = this.getLocation(id);
+            location.numGoing += 1;
+            location.amGoing = true;
+          }, Function.prototype);
+      },
+      onUnregister(id) {
+        LocationService.unregister(id)
+          .then(() => {
+            const location = this.getLocation(id);
+            location.numGoing -= 1;
+            location.amGoing = false;
+          }, Function.prototype);
+      },
+      getLocation(id) {
+        for (let i = 0; i < this.locations.length; i += 1) {
+          if (this.locations[i].id === id) {
+            return this.locations[i];
+          }
+        }
+        return null;
       },
     },
     components: {
