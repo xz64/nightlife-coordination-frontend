@@ -4,7 +4,7 @@
       <!-- image -->
       <figure class="media-left">
         <p class="image is-64x64">
-          <img src="http:///placehold.it/64x64">
+          <img class="nc-listing-image" :src="`/api/photos/${photoReference}`">
         </p>
       </figure>
       
@@ -33,6 +33,7 @@
       description: String,
       amGoing: Boolean,
       numGoing: Number,
+      photoReference: String,
     },
     methods: {
       handleGoAction() {

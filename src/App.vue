@@ -26,6 +26,7 @@
               :amGoing="location.amGoing"
               :numGoing="location.numGoing"
               :description="location.description"
+              :photoReference="location.photo_reference"
               @register="onRegister($event)"
               @unregister="onUnregister($event)"
             ></location-listing>
