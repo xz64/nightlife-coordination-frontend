@@ -10,6 +10,7 @@
         <div class="column is-one-third">
           <location-input
             :is-loading="isLoading"
+            :value="searchText"
             @locationEntered="onInput($event)"
           >
           </location-input>
@@ -46,13 +47,22 @@
   export default {
     data() {
       return {
+        searchText: '',
         isLoading: false,
         locations: [],
       };
     },
+    mounted() {
+      const query = localStorage.getItem('query');
+      if (query) {
+        this.searchText = query;
+        this.onInput(query);
+      }
+    },
     methods: {
       onInput(location) {
         this.isLoading = true;
+        localStorage.setItem('query', location);
         LocationService.getLocations(location)
           .then((response) => {
             this.locations = response.data;

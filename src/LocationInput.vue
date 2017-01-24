@@ -2,7 +2,13 @@
   <div>
     <label class="label">Location</label>
     <p class="control" :class="{ 'is-loading': isLoading }">
-      <input class="input" type="text" placeholder="Enter at least 3 characters" @input="search">
+      <input
+        v-model="value"
+        class="input"
+        type="text"
+        placeholder="Enter at least 3 characters"
+        @input="search"
+      >
       {{ searchText }}
     </p>
   </div>
@@ -11,6 +17,7 @@
 <script>
   export default {
     props: {
+      value: String,
       isLoading: {
         type: Boolean,
         default: false,
