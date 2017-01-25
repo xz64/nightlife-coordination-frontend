@@ -10,7 +10,7 @@
         <div class="column is-one-third">
           <location-input
             :is-loading="isLoading"
-            :value="searchText"
+            :initialValue="searchText"
             @locationEntered="onInput($event)"
           >
           </location-input>
@@ -52,7 +52,7 @@
         locations: [],
       };
     },
-    mounted() {
+    created() {
       const query = localStorage.getItem('query');
       if (query) {
         this.searchText = query;
