@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 var outputDir = 'dist';
 
@@ -68,4 +69,9 @@ var config = {
   ]
 };
 
-module.exports = config;
+module.exports = function(env) {
+  if (env === 'prod') {
+    config.plugins.push(new UglifyJSPlugin());
+  }
+  return config;
+};
